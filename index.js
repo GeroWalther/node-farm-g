@@ -85,7 +85,7 @@ const server = http.createServer((req, res) => {
       return el.slug === slug;
     });
     const output = replaceTemplate(tempProduct, product);
-    res.end(output)[0];
+    res.end(output);
 
     //API
   } else if (pathname == "/api") {
