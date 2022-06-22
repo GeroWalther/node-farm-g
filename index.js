@@ -63,7 +63,7 @@ console.log(slugs);
 console.log(slugify("fresh avocados", { lower: true }));
 
 const server = http.createServer((req, res) => {
-  const { query, pathname } = url.parse(req.url, true);
+  const { query, pathname, search } = url.parse(req.url, true);
   const pathName = req.url;
 
   /// Overview page
@@ -80,7 +80,9 @@ const server = http.createServer((req, res) => {
     // Product page
   } else if (pathname.includes("/product")) {
     res.writeHead(200, { "Content-type": "text/html" });
-    const slug = pathname.replace("/product/", "");
+    // const slug = pathname.replace("/product/", "");
+    const slug = search.replace(/\?id=/, "");
+    console.log(url.parse(req.url, true));
     const product = dataObj.find((el) => {
       return el.slug === slug;
     });
